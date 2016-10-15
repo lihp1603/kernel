@@ -134,19 +134,21 @@
 		};
 	};
 
-	lp8752: lp8752@60 {
-		compatible = "ti,lp8752";
-		reg = <0x60>;
-		vin0-supply = <&vcc5v0_sys>;
-		regulators {
-			vdd_gpu: lp8752_buck0 {
-				regulator-name = "vdd_gpu";
-				regulator-min-microvolt = <735000>;
-				regulator-max-microvolt = <1400000>;
-				regulator-ramp-delay = <6000>;
-				regulator-always-on;
-				regulator-boot-on;
-			};
+	vdd_gpu: syr828@41 {
+		compatible = "silergy,syr828";
+		reg = <0x41>;
+		vin-supply = <&vcc5v0_sys>;
+		regulator-compatible = "fan53555-reg";
+		regulator-name = "vdd_gpu";
+		regulator-min-microvolt = <712500>;
+		regulator-max-microvolt = <1500000>;
+		regulator-ramp-delay = <1000>;
+		fcs,suspend-voltage-selector = <1>;
+		regulator-always-on;
+		regulator-boot-on;
+		regulator-initial-state = <3>;
+			regulator-state-mem {
+			regulator-off-in-suspend;
 		};
 	};
 
